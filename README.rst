@@ -1,6 +1,10 @@
 font-awesome-customize - Create custom versions of `Font Awesome`_
 ==================================================================
 
+.. image:: https://travis-ci.org/severinh/font-awesome-customize.png
+   :alt: Build Status
+   :text: https://travis-ci.org/severinh/font-awesome-customize
+
 font-awesome-customize is a command-line tool written in Python that generates
 custom versions of the iconic `Font Awesome`_ with just the icons you need.
 If you only require a small subset of the icons provided by Font Awesome,
@@ -25,9 +29,12 @@ Then, install font-awesome-customize from `PyPI`_ using::
     sudo pip install font-awesome-customize
 
 To a custom version of `Font Awesome`_ containing the icons
-``music`` and ``search`` in the folder ``fontawesome-custom``, use::
+``music`` and ``search`` in the current directory, use::
 
-	font-awesome-customize -o fontawesome-custom music search
+	font-awesome-customize music search
+
+Alternatively, use the ``-o`` option to indicate what folder to put
+the CSS and font files in.
 
 .. _Font Awesome: http://fortawesome.github.io/Font-Awesome/
 .. _icnfnt: https://github.com/johnsmclay/icnfnt
