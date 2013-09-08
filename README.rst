@@ -2,8 +2,8 @@ font-awesome-customize - Create custom versions of `Font Awesome`_
 ==================================================================
 
 .. image:: https://travis-ci.org/severinh/font-awesome-customize.png
-   :alt: Build Status
-   :text: https://travis-ci.org/severinh/font-awesome-customize
+   :alt: Travis CI build status
+   :target: https://travis-ci.org/severinh/font-awesome-customize
 
 font-awesome-customize is a command-line tool written in Python that generates
 custom versions of the iconic `Font Awesome`_ with just the icons you need.
