@@ -1,4 +1,3 @@
-==================================================================
 font-awesome-customize - Create custom versions of `Font Awesome`_
 ==================================================================
 
@@ -17,20 +16,17 @@ Instead, you may prefer automating the process with font-awesome-customize.
 Quick Start
 -----------
 
-On Ubuntu, install the dependencies using
+On Ubuntu, install the dependencies using::
 
-.. code:: bash
     sudo apt-get install python-pip python-fontforge
 
-Then, install font-awesome-customize from `PyPI`_ using
+Then, install font-awesome-customize from `PyPI`_ using::
 
-.. code:: bash
     sudo pip install font-awesome-customize
 
 To a custom version of `Font Awesome`_ containing the icons
-`music` and `search` in the folder `fontawesome-custom`, use
+``music`` and ``search`` in the folder ``fontawesome-custom``, use::
 
-.. code:: bash
 	font-awesome-customize -o fontawesome-custom music search
 
 .. _Font Awesome: http://fortawesome.github.io/Font-Awesome/
