@@ -17,18 +17,15 @@ remembering which icons you need and selecting them by hand may be a hassle.
 Instead, you may prefer automating the process with font-awesome-customize.
 
 
-Quick Start
------------
+Usage
+-----
 
-On Ubuntu, install the dependencies using::
+On Ubuntu, install font-awesome-customize from `PyPI`_ and its dependencies using::
 
     sudo apt-get install python-pip python-fontforge
-
-Then, install font-awesome-customize from `PyPI`_ using::
-
     sudo pip install font-awesome-customize
 
-To a custom version of `Font Awesome`_ containing the icons
+To generate a custom version of `Font Awesome`_ containing the icons
 ``music`` and ``search`` in the current directory, use::
 
 	font-awesome-customize music search
