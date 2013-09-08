@@ -38,8 +38,16 @@ class FontDescription(object):
         return os.path.join(self.base_dir, 'font')
 
     @property
+    def eot_file(self):
+        return os.path.join(self.font_folder, self.font_name + '-webfont.eot')
+
+    @property
     def tff_file(self):
         return os.path.join(self.font_folder, self.font_name + '-webfont.ttf')
+
+    @property
+    def woff_file(self):
+        return os.path.join(self.font_folder, self.font_name + '-webfont.woff')
 
     @property
     def css_folder(self):
@@ -48,3 +56,8 @@ class FontDescription(object):
     @property
     def css_file(self):
         return os.path.join(self.css_folder, 'font-awesome.css')
+
+    @property
+    def css_ie7_file(self):
+        return os.path.join(self.css_folder, 'font-awesome-ie7.css')
+    

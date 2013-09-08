@@ -63,7 +63,6 @@ class CSSBuilder(object):
 
         with open(source.css_file) as f:
             css = f.read()
-
             self._base_css = self.CSS_ICON_RULE_PATTERN.sub(css, '')
 
     def add_glyph(self, glyph):
@@ -168,4 +167,6 @@ class FontBuilder(object):
         if not os.path.exists(target.font_folder):
             os.makedirs(target.font_folder)
 
+        self._new_font.generate(target.eot_file)
         self._new_font.generate(target.tff_file)
+        self._new_font.generate(target.woff_file)
