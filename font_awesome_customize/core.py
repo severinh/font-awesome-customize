@@ -2,7 +2,7 @@ import os.path
 
 from xstatic.pkg import font_awesome
 
-class Glyph(object):
+class Icon(object):
     def __init__(self, name, unicode_value):
         self._name = name
         self._unicode_value = unicode_value

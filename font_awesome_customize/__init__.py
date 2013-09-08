@@ -10,7 +10,7 @@ def build(icon_names, output_dir):
 
     with Builder() as builder:
         for icon_name in icon_names:
-            builder.add_glyph(icon_name)
+            builder.add_icon(icon_name)
 
         builder.write(target)
 

@@ -6,7 +6,7 @@ import logging
 
 from collections import OrderedDict
 
-from .core import Glyph, FontDescription
+from .core import Icon, FontDescription
 
 class Builder(object):
     def __init__(self, source=None):
@@ -19,8 +19,8 @@ class Builder(object):
         self._css_builder = CSSBuilder(source)
         self._builders = [self._font_builder, self._css_builder]
 
-        self._source_glyphs = CSSBuilder.extract_glyphs(source)
-        self._glyphs = OrderedDict()
+        self._source_icons = CSSBuilder.extract_icons(source)
+        self._icons = OrderedDict()
 
     def __enter__(self):
         for builder in self._builders:
@@ -31,21 +31,21 @@ class Builder(object):
         for builder in self._builders:
             builder.__exit__(*args)
 
-    def add_glyph(self, name):
-        if name not in self._glyphs:
-            glyph = self._source_glyphs[name]
-            self._glyphs[name] = glyph
+    def add_icon(self, name):
+        if name not in self._icons:
+            icon = self._source_icons[name]
+            self._icons[name] = icon
 
             for builder in self._builders:
-                builder.add_glyph(glyph)
+                builder.add_icon(icon)
 
     @property
     def source(self):
         return self._source
 
     @property
-    def custom_glyphs(self):
-        return list(self._glyphs.values())
+    def custom_icons(self):
+        return list(self._icons.values())
 
     def write(self, target):
         for builder in self._builders:
@@ -65,7 +65,7 @@ class CSSBuilder(object):
             css = f.read()
             self._base_css = self.CSS_ICON_RULE_PATTERN.sub(css, '')
 
-    def add_glyph(self, glyph):
+    def add_icon(self, icon):
         pass
 
     def write(self, target):
@@ -79,23 +79,23 @@ class CSSBuilder(object):
         pass
 
     @classmethod
-    def extract_glyphs(cls, source):
-        glyphs = OrderedDict()
+    def extract_icons(cls, source):
+        icons = OrderedDict()
 
         with open(source.css_file) as f:
             css = f.read()
 
-            logging.debug('Loading glyph map from %s...', source.css_file)
+            logging.debug('Loading icon map from %s...', source.css_file)
             for match in cls.CSS_ICON_RULE_PATTERN.finditer(css):
                 name = match.group('name')
                 unicode_value = int(match.group('content'), 16)
                 
-                glyph = Glyph(name, unicode_value)
-                glyphs[name] = glyph
+                icon = Icon(name, unicode_value)
+                icons[name] = icon
 
-                logging.debug('Found glyph \'%s\'', name)
+                logging.debug('Found icon \'%s\'', name)
 
-        return glyphs
+        return icons
 
 
 """
@@ -147,17 +147,17 @@ class FontBuilder(object):
         self._new_font.close()
         self._source_font.close()
 
-    def add_glyph(self, glyph):
+    def add_icon(self, icon):
         # Find the glyph and copy it
         self._source_font.selection.select(('more', 'unicode', None),
-            glyph.unicode_value)
+            icon.unicode_value)
         self._source_font.copy()
         
         # Create a new glyph at the next generated unicode address,
         # paste the outlines, re-name it
-        self._new_font.selection.select(('unicode',), glyph.unicode_value)
+        self._new_font.selection.select(('unicode',), icon.unicode_value)
         self._new_font.paste()
-        self._new_font[glyph.unicode_value].glyphname = glyph.name
+        self._new_font[icon.unicode_value].glyphname = icon.name
         
         # Clear the selections
         self._source_font.selection.none()
