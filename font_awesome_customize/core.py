@@ -1,19 +1,38 @@
 import os.path
 
+from collections import OrderedDict
 from xstatic.pkg import font_awesome
 
-class Icon(object):
-    def __init__(self, name, unicode_value):
-        self._name = name
+class Glyph(object):
+    def __init__(self, unicode_value, *icon_names):
+        if len(icon_names) == 0:
+            raise ValueError('icon must have at least one name')
+
+        self._icon_names = icon_names
         self._unicode_value = unicode_value
 
     @property
-    def name(self):
-        return self._name
+    def icon_names(self):
+        return list(self._icon_names)
 
     @property
     def unicode_value(self):
         return self._unicode_value
+
+
+class GlyphSet(object):
+    def __init__(self):
+        self._map = OrderedDict()
+
+    def __getitem__(self, icon_name):
+        return self._map[icon_name]
+
+    def add(self, glyph):
+        for icon_name in glyph.icon_names:
+            self._map[icon_name] = glyph
+
+    def __contains__(self, icon_name):
+        return icon_name in self._map
 
 
 class FontDescription(object):
